@@ -174,7 +174,7 @@ NNTFunctions.NeuralNTree.prototype.backwardTrain = function(arg) {
 		var bmuSim = NNTFunctions.util.similarity(arg, bmu.point),
 		    curSim = NNTFunctions.util.similarity(arg, this.terminals[key].point);
 
-		if (bmuSim < curSim)
+		if (bmuSim > curSim)
 			bmu = this.terminals[key];
 
         }
