@@ -312,15 +312,10 @@ NNTFunctions.NeuralNTree.prototype.forwardTrain = function(arg) {
                         var left  = NNTFunctions.util.similarity(arg, cur.left.point),
                             right = NNTFunctions.util.similarity(arg, cur.right.point);
 
-                        if (left >= right) {
-
+                        if (left >= right) 
                                 cur = cur.left;
-
-                        } else {
-
+			else 
                                 cur = cur.right;
-
-                        }
                         
 			this.levelUpdate(cur, arg);
 
