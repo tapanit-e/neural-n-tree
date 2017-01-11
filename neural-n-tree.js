@@ -16,7 +16,7 @@ NNTFunctions.util = {
         	if ('undefined' === typeof opt)
                 	return def;
 
-        	return ('undefined' !== typeof opt[name]) ? opt[name] : def;
+        	return 'undefined' !== typeof opt[name] ? opt[name] : def;
 
 	},
 
@@ -283,10 +283,15 @@ NNTFunctions.NeuralNTree.prototype.cluster = function(arg) {
                         else
                                 cur = cur.right;
 
-                } else if (null === cur.left && null !== cur.right)
-                        cur = cur.right;
-                else
+                } else if (null === cur.left && null !== cur.right) {
+                 
+			cur = cur.right;
+			
+		} else {
+			
                         cur = cur.left;
+			
+		}
 
         }
 
@@ -319,10 +324,15 @@ NNTFunctions.NeuralNTree.prototype.forwardTrain = function(arg) {
                         
 			this.levelUpdate(cur, arg);
 
-                } else if (null !== cur.left && null === cur.right)
+                } else if (null !== cur.left && null === cur.right) {
+			
                         cur = cur.left;
-                else
+			
+		} else {
+			
                         cur = cur.right;
+			
+		}
 
         }
 
