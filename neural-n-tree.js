@@ -213,7 +213,7 @@ NNTFunctions.NeuralNTree.prototype.levelOrder = function(node) {
 
         	current = temporary.shift();
 
-        	if (current !== null) {
+        	if (null !== current) {
 
             		var left  = current.left,
             		    right = current.right;
