@@ -140,7 +140,7 @@ NNTFunctions.NeuralNTree.prototype._initTree = function(arr, min, max) {
         var mid = Math.round((min + max) / 2),
             node = new NNTFunctions.NNTNode(arr[mid]);
 
-        if (this.rootNode === null)
+        if (null === this.rootNode)
                 this.rootNode = node;
 
         node.left = this._initTree(arr, min, mid - 1);
