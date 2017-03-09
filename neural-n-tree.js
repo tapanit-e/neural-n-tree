@@ -179,12 +179,10 @@ NNTFunctions.NeuralNTree.prototype.backwardTrain = function(arg) {
 
         }
 
-        while (null !== bmu) {
+        while (this.rootNode !== bmu) {
                 
+		this.levelUpdate(bmu, arg);
 		bmu = bmu.parent;
-
-                if (this.rootNode !== bmu)
-                        this.levelUpdate(bmu, arg);
 
         }
 
