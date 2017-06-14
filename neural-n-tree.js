@@ -109,7 +109,8 @@ NNTFunctions.NeuralNTree = function(option) {
 
 NNTFunctions.NeuralNTree.prototype.postOrder = function(node) {
 
-        if (null !== node && 'undefined' !== typeof node) {
+        if (null !== node && 
+	    'undefined' !== typeof node) {
 
                 this.postOrder(node.left);
                 this.postOrder(node.right);
@@ -153,7 +154,8 @@ NNTFunctions.NeuralNTree.prototype._initTree = function(arr, min, max) {
         if (null !== node.right)
                 node.right.parent = node;
 
-        if (null === node.left && null === node.right)
+        if (null === node.left && 
+	    null === node.right)
                 node.isTerminal = true;
 
         return node;
@@ -179,7 +181,7 @@ NNTFunctions.NeuralNTree.prototype.backwardTrain = function(arg) {
 
         }
 
-        while (this.rootNode !== bmu) {
+        while (null !== bmu) {
                 
 		this.levelUpdate(bmu, arg);
 		bmu = bmu.parent;
@@ -245,19 +247,27 @@ NNTFunctions.NeuralNTree.prototype.levelUpdate = function(node, arg) {
 
         for (var i = 0, len = tree.length; i < len; i++) {
 
-                for (var j = 0, treeLen = tree[i].length; j < treeLen; j++)
-                        if (null !== tree[i][j])
-                                for (var k = 0, pointLen = tree[i][j].point.length; k < pointLen; k++)
-                                        tree[i][j].point[k] = this.update(tree[i][j].point[k], arg[k], ((i + 1) / (levels + 1)));
+                for (var j = 0, treeLen = tree[i].length; j < treeLen; j++) {
+                
+			if (null !== tree[i][j]) {
+                                
+				for (var k = 0, pointLen = tree[i][j].point.length; k < pointLen; k++) {
+                                        
+					tree[i][j].point[k] = this.update(tree[i][j].point[k], arg[k], ((i + 1) / (levels + 1)));
+					
+				}
+		
+			}
 
-
+		}
+		
         }
 
 };
 
 NNTFunctions.NeuralNTree.prototype.update = function(point, arg, curLevel) {
 
-        var val = point + this.alpha * curLevel * (arg - point);
+        var val = point + this.alpha * (1 / curLevel) * (arg - point);
 
         return val;
 
@@ -271,7 +281,8 @@ NNTFunctions.NeuralNTree.prototype.cluster = function(arg) {
 
         while (! cur.isTerminal) {
 
-                if (null !== cur.left && null !== cur.right) {
+                if (null !== cur.left &&
+		    null !== cur.right) {
 
                         var left  = NNTFunctions.util.similarity(arg, cur.left.point),
                             right = NNTFunctions.util.similarity(arg, cur.right.point);
@@ -281,7 +292,8 @@ NNTFunctions.NeuralNTree.prototype.cluster = function(arg) {
                         else
                                 cur = cur.right;
 
-                } else if (null === cur.left && null !== cur.right) {
+                } else if (null === cur.left && 
+			   null !== cur.right) {
                  
 			cur = cur.right;
 			
@@ -305,7 +317,8 @@ NNTFunctions.NeuralNTree.prototype.forwardTrain = function(arg) {
 
         while (null !== cur) {
 
-                if (null !== cur.left && null !== cur.right) {
+                if (null !== cur.left && 
+		    null !== cur.right) {
 
                         var left  = NNTFunctions.util.similarity(arg, cur.left.point),
                             right = NNTFunctions.util.similarity(arg, cur.right.point);
@@ -317,7 +330,8 @@ NNTFunctions.NeuralNTree.prototype.forwardTrain = function(arg) {
                         
 			this.levelUpdate(cur, arg);
 
-                } else if (null !== cur.left && null === cur.right) {
+                } else if (null !== cur.left &&
+			   null === cur.right) {
 			
                         cur = cur.left;
 			
