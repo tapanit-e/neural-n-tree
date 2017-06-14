@@ -305,7 +305,7 @@ NNTFunctions.NeuralNTree.prototype.cluster = function(arg) {
 
         }
 
-        return cur;
+        return cur.index;
 
 };
 
