@@ -110,7 +110,7 @@ class NNT:
 		
 		while len(temporary) > 0:
 		
-			if len(nodes) >= 2 ^ level:
+			if len(nodes) >= 2 ** level:
 			
 				tree.append(nodes)
 				nodes = []
