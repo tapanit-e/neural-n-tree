@@ -192,51 +192,50 @@ NNTFunctions.NeuralNTree.prototype.backwardTrain = function(arg) {
 
 NNTFunctions.NeuralNTree.prototype.levelOrder = function(node) {
 
-	var temporary 	= [],
-    	    tree 	= [],
-            nodes 	= [],
-    	    current 	= node,
-    	    level 	= 1; 
-
-    	temporary.push(current);
-    	tree.push([current]);
-
-    	while (temporary.length > 0) {
-        	
-		if (nodes.length >= Math.pow(2, level)) {
-
-            		tree.push(nodes);
-            		nodes = [];
-            		level++;
-
-        	}
-
-        	current = temporary.shift();
-
-        	if (null !== current) {
-
-            		var left  = current.left,
-            		    right = current.right;
-
-            		temporary.push(left);
-            		nodes.push(left);
-
-            		temporary.push(right);
-            		nodes.push(right);
-
-        	} else {
-            		
-			nodes.push(null);
-            		nodes.push(null);
-        
+	var result = [];
+	
+	if (null === node)
+		return result;
+	
+	var list = [];
+	
+	list.push(node);
+	
+	while (list.length > 0) {
+	
+		var plist = [],
+		    level = [];
+			
+		while (list.length > 0) {
+		
+			node = list.shift();
+			
+			level.push(node);
+			
+			var left  = node.left,
+			    right = node.right;
+				
+			if (null !== left) {
+			
+				plist.push(left);
+			
+			}
+			
+			if (null !== right) {
+			
+				plist.push(right);
+			
+			}
+		
 		}
-    
+		
+		result.push(level);
+		
+		list = plist;
+	
 	}
-    
-	if (nodes.length > 0)
-	        tree.push(nodes);
 
-    	return tree;
+	return result;
 
 };
 
