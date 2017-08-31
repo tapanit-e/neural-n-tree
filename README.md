@@ -7,4 +7,4 @@ Training of Neural N-Tree consists of two phases: backward training and forward 
 
 While consisting of the points in the inner product space, the measurement of similarity in Neural N-Tree is cosine similarity.
 
-Neural N-Tree works best when the number of clusters is relatively large.
+Neural N-Tree works best when the number of clusters is relatively large (~8).
