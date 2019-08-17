@@ -313,6 +313,8 @@ NNTFunctions.NeuralNTree.prototype.forwardTrain = function(arg) {
         arg	= NNTFunctions.util.convertRange(arg, [this.min, this.max], [-2, 2]);
 
         var cur	= this.rootNode;
+	
+	this.levelUpdate(cur, arg);
 
         while (null !== cur) {
 
