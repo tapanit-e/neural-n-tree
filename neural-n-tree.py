@@ -162,6 +162,8 @@ class NNT:
 		
 		current = self.root
 		
+		self.__level_update(current, arg)
+		
 		while not current.is_terminal:
 		
 			if current.left != None and current.right != None:
